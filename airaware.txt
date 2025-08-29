@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Air Aware App</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+    color: #222;
+    padding: 20px;
+    text-align: center;
+  }
+  h1 {
+    color: #00695c;
+    margin-bottom: 10px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: auto;
+  }
+  .aqi-value {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  .status {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  .advice {
+    font-size: 0.9rem;
+    color: #444;
+    margin-top: 10px;
+  }
+  button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #00695c;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #004d40;
+  }
+</style>
+</head>
+<body>
+  <h1>🌍 Air Aware</h1>
+  <div class="card">
+    <p>Current Air Quality Index (AQI):</p>
+    <div id="aqi" class="aqi-value">--</div>
+    <div id="status" class="status">Loading...</div>
+    <p id="advice" class="advice"></p>
+    <button onclick="checkAir()">Check Air</button>
+  </div>
+
+<script>
+function checkAir() {
+  // For now we use a random AQI value (in real app fetch from API)
+  const aqi = Math.floor(Math.random() * 300); 
+  document.getElementById("aqi").textContent = aqi;
+
+  let status = "";
+  let advice = "";
+
+  if (aqi <= 50) {
+    status = "Good 😊";
+    advice = "Air quality is safe. Enjoy outdoor activities!";
+  } else if (aqi <= 100) {
+    status = "Moderate 🙂";
+    advice = "Air quality is acceptable. Sensitive people should take care.";
+  } else if (aqi <= 150) {
+    status = "Unhealthy for Sensitive Groups 😷";
+    advice = "Limit prolonged outdoor exertion if you have asthma or heart issues.";
+  } else if (aqi <= 200) {
+    status = "Unhealthy ⚠";
+    advice = "Everyone may feel effects. Consider wearing a mask outdoors.";
+  } else if (aqi <= 300) {
+    status = "Very Unhealthy 🚫";
+    advice = "Avoid outdoor activities. Keep windows closed.";
+  } else {
+    status = "Hazardous ☠";
+    advice = "Stay indoors, use air purifiers if possible.";
+  }
+
+  document.getElementById("status").textContent = status;
+  document.getElementById("advice").textContent = advice;
+}
+</script>
+</body>
+</html>
